@@ -1,18 +1,10 @@
-package com.example.utm.demo.parking.model;
+package com.example.utm.demo.parking.models;
 
 public class Driver {
-
-   private String name;
-   private String surname;
-   private String licenseNumber;
-
-   public Driver(){}
-
-    public Driver(String name, String surname, String licenseNumber) {
-        this.name = name;
-        this.surname = surname;
-        this.licenseNumber = licenseNumber;
-    }
+    private Long id;
+    private String name;
+    private String surname;
+    private String licenseNumber;
 
     public String getName() {
         return name;
@@ -36,5 +28,13 @@ public class Driver {
 
     public void setLicenseNumber(String licenseNumber) {
         this.licenseNumber = licenseNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

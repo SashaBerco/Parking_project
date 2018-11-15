@@ -8,12 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/registration")
-public class RegistrationController {
-
-    @GetMapping(value = "/hello")
-    ResponseEntity<String> hello() {
-
-        return new ResponseEntity<>("Hello", HttpStatus.OK);
-    }
+public class ParkingController {
 
 }

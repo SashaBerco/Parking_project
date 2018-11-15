@@ -1,6 +1,5 @@
 package com.example.utm.demo.controllers;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @RequestMapping("/help")
-    public String index(){
+    public String index() {
         return "index";
     }
 
