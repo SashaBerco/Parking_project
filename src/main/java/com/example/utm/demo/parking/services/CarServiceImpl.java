@@ -14,17 +14,24 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void saveCar(Car car) {
+        //TODO: check if car exists and if it does not do store else throw CarAlreadyExists
         carRepository.store(car);
     }
 
     @Override
-    public void editCar(Car car) {
+    public void editCar(Long carId, Car car) {
+        //TODO: check if car exists and if it does do store else throw CarNotFoundException
         carRepository.store(car);
     }
 
     @Override
     public Car getCar(Long carId) {
         return carRepository.getById(carId);
+    }
+
+    @Override
+    public List<Car> getAllCars() {
+        return carRepository.getAll();
     }
 
     @Autowired

@@ -1,13 +1,10 @@
 package com.example.utm.demo.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/registration")
+@RequestMapping(value = "/parking")
 public class ParkingController {
-
+    //TODO: add methods from parking repository to controller (with respect to rest conventions)
 }

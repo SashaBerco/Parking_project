@@ -1,6 +1,5 @@
 package com.example.utm.demo.parking.repositories;
 
-import com.example.utm.demo.parking.models.Car;
 import com.example.utm.demo.parking.models.ParkingPlace;
 
 public interface ParkingRepository {

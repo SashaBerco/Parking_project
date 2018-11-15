@@ -30,8 +30,13 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 
     @Override
     public void assignCar(Long parkingPlaceId, Long placeId, Long carId) {
+        //TODO: check if car with given id exists and if it does assign it to place
         parkingLots.get(parkingPlaceId).getPlaceById(placeId).setAssignedCar(carRepository.getById(carId));
     }
+
+    //TODO: get all parking lots (add method to controllers as well)
+
+    //TODO: create get all Parking places method for a given parking lot (add method to controllers as well)
 
     @Autowired
     public void setCarRepository(CarRepository carRepository) {

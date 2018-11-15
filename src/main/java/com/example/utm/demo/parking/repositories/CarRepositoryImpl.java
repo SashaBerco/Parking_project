@@ -3,18 +3,17 @@ package com.example.utm.demo.parking.repositories;
 import com.example.utm.demo.parking.models.Car;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class CarRepositoryImpl implements CarRepository {
 
-    private Map<Long, Car> cars = new HashMap<>();
+    private static Map<Long, Car> cars = new HashMap<>();
 
     @Override
     public void store(Car car) {
         if (car.getId() == null) {
-            cars.put(cars.get((long) cars.size()).getId(), car);
+            cars.put(new Random().nextLong(), car);
             return;
         }
 
@@ -24,5 +23,10 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public Car getById(Long id) {
         return cars.get(id);
+    }
+
+    @Override
+    public List<Car> getAll() {
+        return new ArrayList<>(cars.values());
     }
 }
