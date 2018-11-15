@@ -14,7 +14,7 @@ public class CarController {
 
     private CarService carService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseStatus(code = HttpStatus.OK)
     public void saveCar(@RequestBody Car car) {
         carService.saveCar(car);

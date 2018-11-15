@@ -18,7 +18,9 @@ public class CarRepositoryImpl implements CarRepository {
     @Override
     public void store(Car car) {
         if (car.getId() == null) {
-            cars.put(new Random().nextLong(), car);
+            Long id = new Random().nextLong();
+            car.setId(id);
+            cars.put(id, car);
             return;
         }
 
