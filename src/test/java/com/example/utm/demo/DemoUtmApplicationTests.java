@@ -1,4 +1,4 @@
-package com.example.utm.demoUTM;
+package com.example.utm.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
