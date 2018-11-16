@@ -5,6 +5,7 @@ import com.example.utm.demo.parking.models.ParkingPlace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Repository
@@ -12,16 +13,21 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 
     private CarRepository carRepository;
 
-    private static Map<Long, ParkingLot> parkingLots = Map.of(0L, new ParkingLot(
-            0L,
-            "some address 54",
-            Map.of(
-                    0L, new ParkingPlace(0L),
-                    1L, new ParkingPlace(1L),
-                    2L, new ParkingPlace(2L),
-                    3L, new ParkingPlace(3L)
-            )
-    ));
+    private static Map <Long, ParkingPlace> parkingPlaces =  new HashMap<>();
+
+    private static Map<Long, ParkingLot> parkingLots = new HashMap<>();
+
+           static {
+
+               parkingPlaces.put(0L, new ParkingPlace(0L));
+               parkingPlaces.put(1L, new ParkingPlace(1L));
+               parkingPlaces.put(2L, new ParkingPlace(2L));
+               parkingPlaces.put(3L, new ParkingPlace(3L));
+               parkingPlaces.put(4L, new ParkingPlace(4L));
+
+               parkingLots.put(0L, new ParkingLot(0L,
+                       "some address 54",parkingPlaces));
+           }
 
     @Override
     public ParkingPlace getParkingPlace(Long parkingPlaceId, Long placeId) {

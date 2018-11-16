@@ -32,7 +32,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    List<Car> getAllCars() {
+    public List<Car> getAllCars() {
         return carService.getAllCars();
     }
 
