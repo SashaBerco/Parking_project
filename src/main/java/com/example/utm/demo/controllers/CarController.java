@@ -1,5 +1,7 @@
 package com.example.utm.demo.controllers;
 
+import com.example.utm.demo.parking.exceptions.AlreadyExistsException;
+import com.example.utm.demo.parking.exceptions.NotFoundException;
 import com.example.utm.demo.parking.models.Car;
 import com.example.utm.demo.parking.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,13 @@ public class CarController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseStatus(code = HttpStatus.OK)
-    public void saveCar(@RequestBody Car car) {
+    public void saveCar(@RequestBody Car car) throws AlreadyExistsException {
         carService.saveCar(car);
     }
 
     @RequestMapping(value = "/{carId}/edit", method = RequestMethod.PATCH)
     public void editCar(@PathVariable Long carId,
-                        @RequestBody Car car) {
+                        @RequestBody Car car) throws NotFoundException {
         carService.editCar(carId, car);
     }
 

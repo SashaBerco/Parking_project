@@ -1,11 +1,15 @@
 package com.example.utm.demo.parking.repositories;
 
+import com.example.utm.demo.parking.exceptions.NotFoundException;
+import com.example.utm.demo.parking.models.Car;
 import com.example.utm.demo.parking.models.ParkingLot;
 import com.example.utm.demo.parking.models.ParkingPlace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -13,21 +17,18 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 
     private CarRepository carRepository;
 
-    private static Map <Long, ParkingPlace> parkingPlaces =  new HashMap<>();
-
     private static Map<Long, ParkingLot> parkingLots = new HashMap<>();
 
-           static {
-
-               parkingPlaces.put(0L, new ParkingPlace(0L));
-               parkingPlaces.put(1L, new ParkingPlace(1L));
-               parkingPlaces.put(2L, new ParkingPlace(2L));
-               parkingPlaces.put(3L, new ParkingPlace(3L));
-               parkingPlaces.put(4L, new ParkingPlace(4L));
-
-               parkingLots.put(0L, new ParkingLot(0L,
-                       "some address 54",parkingPlaces));
-           }
+    static {
+        Map<Long, ParkingPlace> parkingPlaces1 = new HashMap<>();
+        parkingPlaces1.put(0L, new ParkingPlace(0L));
+        parkingPlaces1.put(1L, new ParkingPlace(1L));
+        parkingPlaces1.put(2L, new ParkingPlace(2L));
+        parkingPlaces1.put(3L, new ParkingPlace(3L));
+        parkingPlaces1.put(4L, new ParkingPlace(4L));
+        parkingLots.put(0L, new ParkingLot(0L,
+                "some address 54", parkingPlaces1));
+    }
 
     @Override
     public ParkingPlace getParkingPlace(Long parkingPlaceId, Long placeId) {
@@ -35,14 +36,36 @@ public class ParkingRepositoryImpl implements ParkingRepository {
     }
 
     @Override
-    public void assignCar(Long parkingPlaceId, Long placeId, Long carId) {
-        //TODO: check if car with given id exists and if it does assign it to place
-        parkingLots.get(parkingPlaceId).getPlaceById(placeId).setAssignedCar(carRepository.getById(carId));
+    public List<ParkingPlace> getAllParkingPlaces(Long parkingPlaceId) {
+        return new ArrayList<>(parkingLots.get(parkingPlaceId).getPlaces().values());
     }
 
-    //TODO: get all parking lots (add method to controllers as well)
+    @Override
+    public ParkingLot getParkingLot(Long parkingLotId) {
+        return parkingLots.get(parkingLotId);
+    }
 
-    //TODO: create get all Parking places method for a given parking lot (add method to controllers as well)
+    @Override
+    public List<ParkingLot> getAllParkingLots() {
+        return new ArrayList<>(parkingLots.values());
+    }
+
+    @Override
+    public void assignCar(Long parkingPlaceId, Long placeId, Long carId) throws NotFoundException {
+        Car car = carRepository.getById(carId);
+        if (car == null) {
+            throw new NotFoundException("car not found");
+        }
+        ParkingLot lot = parkingLots.get(parkingPlaceId);
+        if (lot == null) {
+            throw new NotFoundException("parking lot not found");
+        }
+        ParkingPlace place = lot.getPlaceById(placeId);
+        if (place == null) {
+            throw new NotFoundException("parking place not found");
+        }
+        place.setAssignedCar(car);
+    }
 
     @Autowired
     public void setCarRepository(CarRepository carRepository) {

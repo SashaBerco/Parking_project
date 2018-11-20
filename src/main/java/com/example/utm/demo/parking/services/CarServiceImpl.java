@@ -1,5 +1,7 @@
 package com.example.utm.demo.parking.services;
 
+import com.example.utm.demo.parking.exceptions.AlreadyExistsException;
+import com.example.utm.demo.parking.exceptions.NotFoundException;
 import com.example.utm.demo.parking.models.Car;
 import com.example.utm.demo.parking.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +15,20 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepository;
 
     @Override
-    public void saveCar(Car car) {
-        //TODO: check if car exists and if it does not do store else throw CarAlreadyExists
+    public void saveCar(Car car) throws AlreadyExistsException {
+        if (carRepository.getById(car.getId()) != null) {
+            throw new AlreadyExistsException("car already exists");
+        }
+
         carRepository.store(car);
     }
 
     @Override
-    public void editCar(Long carId, Car car) {
-        //TODO: check if car exists and if it does do store else throw CarNotFoundException
+    public void editCar(Long carId, Car car) throws NotFoundException {
+        if (carRepository.getById(carId) == null) {
+            throw new NotFoundException("car does not exist");
+        }
+
         carRepository.store(car);
     }
 

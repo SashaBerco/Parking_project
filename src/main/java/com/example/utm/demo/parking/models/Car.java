@@ -7,8 +7,6 @@ public class Car {
     private String number;
     private String model;
 
-    public Car() {
-    }
     public Car(Long id, Driver driver, String number, String model) {
         this.id = id;
         this.driver = driver;
